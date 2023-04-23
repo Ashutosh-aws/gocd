@@ -12,26 +12,26 @@ pipelines:
         auto_update: true
         branch: main
     stages:
-    - deploy-cfn:
-        fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: false
-        jobs:
-          deploy:
-            timeout: 0
-            tasks:
-            - exec:
-                arguments:
-                - cloudformation
-                - create-stack
-                - --region
-                - us-east-1
-                - --stack-name
-                - ecs
-                - --template-body
-                - https://raw.githubusercontent.com/Ashutosh-aws/gocd/main/ec2-cfn.yaml
-                command: aws
-                run_if: passed
+      - deploy-cfn:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            deploy:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - cloudformation
+                      - create-stack
+                      - --region
+                      - us-east-1
+                      - --stack-name
+                      - ecs
+                      - --template-body
+                      - https://raw.githubusercontent.com/Ashutosh-aws/gocd/main/ec2-cfn.yaml
+                    command: aws
+                    run_if: passed
