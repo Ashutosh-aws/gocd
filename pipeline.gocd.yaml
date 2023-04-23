@@ -4,7 +4,7 @@ pipeline:
   label_template: 1
   group: my_group
   materials:
-  - git: https://github.com/my_username/my_repo.git
+  - git: https://github.com/Ashutosh-aws/gocd.git
   stages:
   - name: run_commands
     jobs:
