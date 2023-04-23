@@ -1,18 +1,37 @@
-format_version: 3
-pipeline:
-  name: my_pipeline
-  label_template: 1
-  group: my_group
-  materials:
-    - git: https://github.com/Ashutosh-aws/gocd.git
-  stages:
-    - name: run_commands
-      jobs:
-        - name: run_commands_job
-          environment_variables:
-            ENV_VAR1: "ttn-2022"
-          tasks:
-            - exec:
-                command: echo "Hello, world!"
-            - exec:
-                command: ls -la
+format_version: 10
+pipelines:
+  cloudformation-automation:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git-15b866d:
+        git: https://github.com/Ashutosh-aws/gocd.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - deploy-cfn:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            deploy:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - cloudformation
+                      - create-stack
+                      - --region
+                      - us-east-1
+                      - --stack-name
+                      - ecs
+                      - --template-body
+                      - https://raw.githubusercontent.com/Ashutosh-aws/gocd/main/ec2-cfn.yaml
+                    command: aws
+                    run_if: passed
