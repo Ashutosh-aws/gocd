@@ -4,15 +4,15 @@ pipeline:
   label_template: 1
   group: my_group
   materials:
-  - git: https://github.com/Ashutosh-aws/gocd.git
+    - git: https://github.com/Ashutosh-aws/gocd.git
   stages:
-  - name: run_commands
-    jobs:
-    - name: run_commands_job
-      environment_variables:
-        ENV_VAR1: "ttn-2022"
-      tasks:
-      - exec:
-          command: echo "Hello, world!"
-      - exec:
-          command: ls -la
+    - name: run_commands
+      jobs:
+        - name: run_commands_job
+          environment_variables:
+            ENV_VAR1: "ttn-2022"
+          tasks:
+            - exec:
+                command: echo "Hello, world!"
+            - exec:
+                command: ls -la
