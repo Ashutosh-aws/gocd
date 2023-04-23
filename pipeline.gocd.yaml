@@ -16,5 +16,3 @@ pipeline:
           command: echo "Hello, world!"
       - exec:
           command: ls -la
-      - exec:
-          command: echo "Environment variable 1 value: ${ENV_VAR1}"
