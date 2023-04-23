@@ -30,7 +30,7 @@ pipelines:
                       - --region
                       - us-east-1
                       - --stack-name
-                      - ecs
+                      - ec2-sample-cfn
                       - --template-body
                       - https://raw.githubusercontent.com/Ashutosh-aws/gocd/main/ec2-cfn.yaml
                     command: aws
