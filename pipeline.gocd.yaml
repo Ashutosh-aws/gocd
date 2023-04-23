@@ -1,0 +1,20 @@
+format_version: 3
+pipeline:
+  name: my_pipeline
+  label_template: 1
+  group: my_group
+  materials:
+  - git: https://github.com/my_username/my_repo.git
+  stages:
+  - name: run_commands
+    jobs:
+    - name: run_commands_job
+      environment_variables:
+        ENV_VAR1: "ttn-2022"
+      tasks:
+      - exec:
+          command: echo "Hello, world!"
+      - exec:
+          command: ls -la
+      - exec:
+          command: echo "Environment variable 1 value: ${ENV_VAR1}"
