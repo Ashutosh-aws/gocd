@@ -1,0 +1,7 @@
+Resources:
+  MyInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      ImageId: "ami-0aa2b7722dc1b5612"
+      InstanceType: "t2.micro"
+      KeyName: "test123"
